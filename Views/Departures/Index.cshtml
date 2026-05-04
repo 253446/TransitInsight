@@ -1,0 +1,54 @@
+@model IEnumerable<TransitInsight.Models.Departure>
+
+@{
+    ViewData["Title"] = "Departures";
+}
+
+<h1>Departures</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New Departure</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Stop Place</th>
+            <th>Line</th>
+            <th>Destination</th>
+            <th>Aimed</th>
+            <th>Expected</th>
+            <th>Delay</th>
+            <th>Mode</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>@item.StopPlace?.Name</td>
+            <td>@item.LineName</td>
+            <td>@item.Destination</td>
+            <td>@item.AimedDepartureTime.ToString("dd.MM HH:mm")</td>
+            <td>@item.ExpectedDepartureTime.ToString("dd.MM HH:mm")</td>
+            <td>
+                @if (item.DelayMinutes > 0)
+                {
+                    <span class="badge bg-danger">@item.DelayMinutes min</span>
+                }
+                else
+                {
+                    <span class="badge bg-success">On time</span>
+                }
+            </td>
+            <td>@item.TransportMode</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

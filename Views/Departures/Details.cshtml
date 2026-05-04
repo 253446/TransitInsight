@@ -1,0 +1,20 @@
+@model TransitInsight.Models.Departure
+
+@{
+    ViewData["Title"] = "Departure Details";
+}
+
+<h1>Departure Details</h1>
+
+<div class="card p-3">
+    <p><strong>Stop Place:</strong> @Model.StopPlace?.Name</p>
+    <p><strong>Line:</strong> @Model.LineName</p>
+    <p><strong>Destination:</strong> @Model.Destination</p>
+    <p><strong>Aimed:</strong> @Model.AimedDepartureTime.ToString("dd.MM.yyyy HH:mm")</p>
+    <p><strong>Expected:</strong> @Model.ExpectedDepartureTime.ToString("dd.MM.yyyy HH:mm")</p>
+    <p><strong>Delay:</strong> @Model.DelayMinutes minutes</p>
+    <p><strong>Transport Mode:</strong> @Model.TransportMode</p>
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mt-3">Edit</a>
+<a asp-action="Index" class="btn btn-secondary mt-3">Back</a>

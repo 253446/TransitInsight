@@ -1,0 +1,49 @@
+@model TransitInsight.Models.Departure
+
+@{
+    ViewData["Title"] = "Edit Departure";
+}
+
+<h1>Edit Departure</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="StopPlaceId" class="form-label">Stop Place</label>
+        <select asp-for="StopPlaceId" class="form-control" asp-items="ViewBag.StopPlaceId"></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LineName" class="form-label"></label>
+        <input asp-for="LineName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Destination" class="form-label"></label>
+        <input asp-for="Destination" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="AimedDepartureTime" class="form-label"></label>
+        <input asp-for="AimedDepartureTime" class="form-control" type="datetime-local" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ExpectedDepartureTime" class="form-label"></label>
+        <input asp-for="ExpectedDepartureTime" class="form-control" type="datetime-local" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DelayMinutes" class="form-label"></label>
+        <input asp-for="DelayMinutes" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TransportMode" class="form-label"></label>
+        <input asp-for="TransportMode" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>
