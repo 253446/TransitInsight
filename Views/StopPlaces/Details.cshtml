@@ -12,6 +12,12 @@
 <p><strong>Longitude:</strong> @Model.Longitude</p>
 
 <h3>Departures</h3>
+<form asp-action="ImportDepartures" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-primary">
+        🔄 Hent avganger fra Entur
+    </button>
+</form>
 
 @if (Model.Departures.Any())
 {

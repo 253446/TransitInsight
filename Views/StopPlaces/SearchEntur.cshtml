@@ -1,0 +1,66 @@
+@model List<TransitInsight.Models.EnturStopSearchResult>
+
+@{
+    ViewData["Title"] = "Search Entur Stop Places";
+}
+
+<h1>Search Stop Places from Entur</h1>
+
+<form asp-action="SearchEntur" method="post" class="mb-4">
+    @Html.AntiForgeryToken()
+
+    <div class="input-group">
+        <input name="searchText"
+               class="form-control"
+               placeholder="Search for stop place, e.g. Horten, Oslo S, Skoppum"
+               value="@ViewBag.SearchText" />
+
+        <button class="btn btn-primary" type="submit">
+            Search Entur
+        </button>
+    </div>
+</form>
+
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Locality</th>
+                <th>EnturId</th>
+                <th>Coordinates</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var stop in Model)
+        {
+            <tr>
+                <td>@stop.Name</td>
+                <td>@stop.Locality</td>
+                <td>@stop.EnturId</td>
+                <td>@stop.Latitude, @stop.Longitude</td>
+                <td>
+                    <form asp-action="SaveFromEntur" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="enturId" value="@stop.EnturId" />
+                        <input type="hidden" name="name" value="@stop.Name" />
+                        <input type="hidden" name="locality" value="@stop.Locality" />
+                        <input type="hidden" name="latitude" value="@stop.Latitude" />
+                        <input type="hidden" name="longitude" value="@stop.Longitude" />
+
+                        <button type="submit" class="btn btn-success btn-sm">
+                            Save stop
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-muted">Search for a stop place to see results from Entur.</p>
+}

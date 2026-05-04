@@ -21,7 +21,6 @@ C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\rjsmcshtml.dswa.c
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\scopedcss\bundle\TransitInsight.styles.css
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\scopedcss\projectbundle\TransitInsight.bundle.scp.css
-C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\compressed\m5m7v2xjtk-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\compressed\6vvoogcd9a-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\compressed\e32qpasqp0-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\compressed\nujf993lnj-{0}-bqjiyaj88i-bqjiyaj88i.gz
@@ -329,3 +328,4 @@ C:\Users\riza5\Eksamen-Csharp\TransitInsight\bin\Debug\net10.0\ru\Microsoft.Code
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
+C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\compressed\m5m7v2xjtk-{0}-chp7lgplxx-chp7lgplxx.gz

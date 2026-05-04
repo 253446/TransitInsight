@@ -1,8 +1,155 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model TransitInsight.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "TransitInsight Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<section class="hero-section mb-5">
+    <div class="hero-overlay">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <span class="badge bg-warning text-dark mb-3">ASP.NET Core MVC + Entur-ready system</span>
+                    <h1 class="display-4 fw-bold text-white">TransitInsight</h1>
+                    <p class="lead text-white-50">
+                        A full stack travel dashboard for managing stop places, departures,
+                        delays and public transport data.
+                    </p>
+                    <div class="mt-4">
+                        <a asp-controller="StopPlaces" asp-action="Index" class="btn btn-light btn-lg me-2">
+                            Manage Stop Places
+                        </a>
+                        <a asp-controller="Departures" asp-action="Index" class="btn btn-outline-light btn-lg">
+                            View Departures
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon">📍</div>
+            <div>
+                <p class="stat-label">Stop Places</p>
+                <h2>@Model.TotalStopPlaces</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon">🚌</div>
+            <div>
+                <p class="stat-label">Departures</p>
+                <h2>@Model.TotalDepartures</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon">⏱️</div>
+            <div>
+                <p class="stat-label">Delayed</p>
+                <h2>@Model.DelayedDepartures</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div>
+                <p class="stat-label">Avg Delay</p>
+                <h2>@Model.AverageDelayMinutes min</h2>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="dashboard-panel">
+            <h3 class="mb-3">Departures by Transport Mode</h3>
+            <canvas id="departuresChart"></canvas>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="dashboard-panel">
+            <h3 class="mb-3">Latest Departures</h3>
+
+            @if (Model.LatestDepartures.Any())
+            {
+                <div class="list-group">
+                    @foreach (var departure in Model.LatestDepartures)
+                    {
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <strong>@departure.LineName → @departure.Destination</strong>
+                                @if (departure.DelayMinutes > 0)
+                                {
+                                    <span class="badge bg-danger">@departure.DelayMinutes min delay</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">On time</span>
+                                }
+                            </div>
+                            <small class="text-muted">
+                                @departure.StopPlace?.Name • @departure.ExpectedDepartureTime.ToString("dd.MM HH:mm")
+                            </small>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No departures registered yet.</p>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const labels = @Html.Raw(Json.Serialize(Model.ChartLabels));
+        const values = @Html.Raw(Json.Serialize(Model.ChartValues));
+
+        const ctx = document.getElementById('departuresChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Departures',
+                    data: values,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}
