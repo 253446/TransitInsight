@@ -1,0 +1,31 @@
+@model TransitInsight.Models.StopPlace
+
+@{
+    ViewData["Title"] = "Stop Place Details";
+}
+
+<h1>@Model.Name</h1>
+
+<p><strong>Entur Id:</strong> @Model.EnturId</p>
+<p><strong>Locality:</strong> @Model.Locality</p>
+<p><strong>Latitude:</strong> @Model.Latitude</p>
+<p><strong>Longitude:</strong> @Model.Longitude</p>
+
+<h3>Departures</h3>
+
+@if (Model.Departures.Any())
+{
+    <ul>
+        @foreach (var departure in Model.Departures)
+        {
+            <li>@departure.LineName → @departure.Destination</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No departures registered yet.</p>
+}
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back</a>

@@ -1,0 +1,39 @@
+@model TransitInsight.Models.StopPlace
+
+@{
+    ViewData["Title"] = "Edit Stop Place";
+}
+
+<h1>Edit Stop Place</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EnturId" class="form-label"></label>
+        <input asp-for="EnturId" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Locality" class="form-label"></label>
+        <input asp-for="Locality" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Latitude" class="form-label"></label>
+        <input asp-for="Latitude" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Longitude" class="form-label"></label>
+        <input asp-for="Longitude" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>
