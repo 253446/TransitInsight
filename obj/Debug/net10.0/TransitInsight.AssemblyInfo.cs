@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TransitInsight")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+913cd68213610a1b86e638fb60933137dce852c6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4545c71e58070383533ba7f233ac4971a40a76a6")]
 [assembly: System.Reflection.AssemblyProductAttribute("TransitInsight")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TransitInsight")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
