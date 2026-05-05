@@ -67,6 +67,30 @@ Relationship:
 - ASP.NET Core Identity
 - Register/Login functionality
 - Admin pages protected using `[Authorize]`
+## Authentication
+
+The application uses ASP.NET Core Identity.
+
+A user can register at:
+
+/Identity/Account/Register
+
+Login is available at:
+
+/Identity/Account/Login
+
+Administrative pages such as StopPlaces and Departures are protected using [Authorize].
+## Testing
+
+Unit tests are located in the TransitInsight.Tests project.
+
+Run tests with:
+
+dotnet test
+
+## Known limitation
+
+Browser geolocation on desktop can be inaccurate because it may use IP-based location. The app also supports manual place search as fallback. 
 
 ### Unit Tests
 - Delay calculation test
