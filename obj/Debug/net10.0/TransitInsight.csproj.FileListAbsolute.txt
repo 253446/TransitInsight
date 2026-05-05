@@ -328,4 +328,4 @@ C:\Users\riza5\Eksamen-Csharp\TransitInsight\bin\Debug\net10.0\ru\Microsoft.Code
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\riza5\Eksamen-Csharp\TransitInsight\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
-C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\compressed\m5m7v2xjtk-{0}-01vkbk1wi1-01vkbk1wi1.gz
+C:\Users\riza5\Eksamen-Csharp\TransitInsight\obj\Debug\net10.0\compressed\m5m7v2xjtk-{0}-35gilfpzhr-35gilfpzhr.gz
