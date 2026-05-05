@@ -1,0 +1,131 @@
+@model List<TransitInsight.Models.EnturStopSearchResult>
+
+@{
+    ViewData["Title"] = "Nearby Stops";
+}
+
+<h1>Nearby Stops</h1>
+
+<p class="text-muted">
+    Find public transport stops near your current location, or search from a selected place.
+</p>
+
+<form id="locationForm" asp-action="Search" method="post" class="mb-4">
+    @Html.AntiForgeryToken()
+
+    <div class="input-group mb-3">
+        <input name="selectedPlace"
+               id="selectedPlaceInput"
+               class="form-control"
+               placeholder="Optional: type a place, e.g. Horten, Oslo S, Skoppum" />
+
+        <button id="findNearbyButton" class="btn btn-primary" type="button">
+            📍 Find stops near me
+        </button>
+    </div>
+
+    <input type="hidden" id="latitudeInput" name="latitude" />
+    <input type="hidden" id="longitudeInput" name="longitude" />
+</form>
+
+<p id="locationStatus" class="text-muted"></p>
+
+@if (ViewBag.SearchInfo != null)
+{
+    <div class="alert alert-info">
+        @ViewBag.SearchInfo
+    </div>
+}
+
+@if (Model.Any())
+{
+    <h3>Stops found nearby</h3>
+
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Locality</th>
+                <th>EnturId</th>
+                <th>Coordinates</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var stop in Model)
+        {
+            <tr>
+                <td>@stop.Name</td>
+                <td>@stop.Locality</td>
+                <td><code>@stop.EnturId</code></td>
+                <td>@stop.Latitude, @stop.Longitude</td>
+                <td>
+                    <form asp-action="SaveStop" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="enturId" value="@stop.EnturId" />
+                        <input type="hidden" name="name" value="@stop.Name" />
+                        <input type="hidden" name="locality" value="@stop.Locality" />
+                        <input type="hidden" name="latitude" value="@stop.Latitude" />
+                        <input type="hidden" name="longitude" value="@stop.Longitude" />
+
+                        <button class="btn btn-success btn-sm" type="submit">
+                            Save stop
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-secondary">
+        Click the button to find stops near your current or selected position.
+    </div>
+}
+
+@section Scripts {
+    <script>
+        const button = document.getElementById("findNearbyButton");
+        const selectedPlaceInput = document.getElementById("selectedPlaceInput");
+        const statusText = document.getElementById("locationStatus");
+        const latitudeInput = document.getElementById("latitudeInput");
+        const longitudeInput = document.getElementById("longitudeInput");
+        const form = document.getElementById("locationForm");
+
+        button.addEventListener("click", () => {
+            const selectedPlace = selectedPlaceInput.value.trim();
+
+            if (selectedPlace.length > 0) {
+                statusText.textContent = "Searching stops near selected place...";
+                form.submit();
+                return;
+            }
+
+            if (!navigator.geolocation) {
+                statusText.textContent = "Geolocation is not supported by this browser.";
+                return;
+            }
+
+            statusText.textContent = "Requesting your location...";
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    latitudeInput.value = position.coords.latitude;
+                    longitudeInput.value = position.coords.longitude;
+                    statusText.textContent = "Location found. Searching Entur...";
+                    form.submit();
+                },
+                () => {
+                    statusText.textContent = "Could not access location. Type a place name instead, for example Horten.";
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+            );
+        });
+    </script>
+}

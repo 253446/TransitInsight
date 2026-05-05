@@ -9,20 +9,34 @@
         <div class="container py-5">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <span class="badge bg-warning text-dark mb-3">ASP.NET Core MVC + Entur-ready system</span>
-                    <h1 class="display-4 fw-bold text-white">TransitInsight</h1>
-                    <p class="lead text-white-50">
-                        A full stack travel dashboard for managing stop places, departures,
-                        delays and public transport data.
+
+                    <span class="badge bg-warning text-dark mb-3">
+                        ASP.NET Core MVC + Entur-ready system
+                    </span>
+
+                    <h1 class="fw-bold text-white">
+                        TransitInsight
+                    </h1>
+
+                    <p class="text-white-50">
+                        A full stack travel dashboard for managing stop places,
+                        departures, delays and real-time public transport data.
                     </p>
+
                     <div class="mt-4">
-                        <a asp-controller="StopPlaces" asp-action="Index" class="btn btn-light btn-lg me-2">
+                        <a asp-controller="StopPlaces"
+                           asp-action="Index"
+                           class="btn btn-light btn-lg me-2">
                             Manage Stop Places
                         </a>
-                        <a asp-controller="Departures" asp-action="Index" class="btn btn-outline-light btn-lg">
+
+                        <a asp-controller="Departures"
+                           asp-action="Index"
+                           class="btn btn-outline-light btn-lg">
                             View Departures
                         </a>
                     </div>
+
                 </div>
             </div>
         </div>

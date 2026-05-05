@@ -1,69 +1,127 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
-}
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
-
-body {
+    margin-bottom: 60px;
     background: #f4f7fb;
+    color: #0f172a;
 }
 
+h1, h2, h3 {
+    letter-spacing: -0.5px;
+}
+
+.btn {
+    border-radius: 12px;
+}
+
+.navbar {
+    background: white !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* PREMIUM HERO */
 .hero-section {
-    background:
-        linear-gradient(120deg, rgba(10, 31, 68, 0.92), rgba(18, 96, 130, 0.84)),
-        url("https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80");
-    background-size: cover;
-    background-position: center;
-    border-radius: 0 0 32px 32px;
+    position: relative;
+    border-radius: 32px;
     overflow: hidden;
+    margin: 36px auto 48px auto;
+    background-image: url('/images/train-bg.jpg');
+    background-size: cover;
+    background-position: center bottom;
+    min-height: 520px;
+    max-width: 1180px;
+    display: flex;
+    align-items: stretch;
+    box-shadow: 0 34px 90px rgba(15, 23, 42, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .hero-overlay {
-    min-height: 360px;
+
+  background:
+    linear-gradient(
+        90deg,
+        rgba(2, 6, 23, 0.92) 0%,
+        rgba(15, 23, 42, 0.78) 42%,
+        rgba(15, 23, 42, 0.28) 100%
+    ),
+    linear-gradient(
+        to bottom,
+        transparent 70%,
+        #f4f7fb 100%
+    );
+    width: 100%;
+    padding-left: 40px;
+    min-height: 520px;
     display: flex;
     align-items: center;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(2, 6, 23, 0.92) 0%,
+            rgba(15, 23, 42, 0.78) 42%,
+            rgba(15, 23, 42, 0.28) 100%
+        );
+}
+
+.hero-section h1 {
+    font-size: 68px;
+    font-weight: 900;
+    letter-spacing: -2.5px;
+    margin-bottom: 16px;
+}
+
+.hero-section p {
+    font-size: 21px;
+    max-width: 720px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.78) !important;
+}
+
+.hero-section .badge {
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-weight: 800;
+}
+
+.hero-section .btn {
+    border-radius: 16px;
+    padding: 13px 24px;
+    font-weight: 700;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    transition: all 0.25s ease;
+}
+
+.hero-section .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
 }
 
 .stat-card {
     background: white;
-    border-radius: 22px;
+    border-radius: 24px;
     padding: 24px;
     display: flex;
     align-items: center;
     gap: 18px;
+    min-height: 130px;
     box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
     border: 1px solid rgba(148, 163, 184, 0.18);
-    min-height: 130px;
 }
 
 .stat-icon {
-    width: 56px;
-    height: 56px;
+    width: 58px;
+    height: 58px;
     border-radius: 18px;
     background: #eef6ff;
     display: grid;
@@ -85,9 +143,54 @@ body {
 
 .dashboard-panel {
     background: white;
-    border-radius: 24px;
+    border-radius: 26px;
     padding: 28px;
     box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
     border: 1px solid rgba(148, 163, 184, 0.18);
 }
+
+.dashboard-panel h3 {
+    font-weight: 800;
+    margin: 0;
+}
+
+.latest-list .list-group-item {
+    border: 1px solid #e5e7eb;
+    padding: 16px;
+}
+
+.table {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.pulse {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.55;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
