@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TransitInsight.Data;
@@ -6,6 +7,7 @@ using TransitInsight.Services;
 
 namespace TransitInsight.Controllers;
 
+[Authorize]
 public class StopPlacesController : Controller
 {
     private readonly ApplicationDbContext _context;

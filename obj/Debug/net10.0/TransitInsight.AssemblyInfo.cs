@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("TransitInsight")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8272fdcd65004d4dc002bdc2b7e2d1241250120b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+913cd68213610a1b86e638fb60933137dce852c6")]
 [assembly: System.Reflection.AssemblyProductAttribute("TransitInsight")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TransitInsight")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
