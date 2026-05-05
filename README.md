@@ -1,4 +1,9 @@
+
 # 🚆 TransitInsight
+
+![.NET](https://img.shields.io/badge/.NET-10-blue)
+![ASP.NET MVC](https://img.shields.io/badge/ASP.NET-MVC-green)
+![Status](https://img.shields.io/badge/status-complete-brightgreen)
 
 ## 📌 Overview
 TransitInsight is a full-stack ASP.NET Core MVC web application for managing public transport data using the Entur API.
@@ -41,6 +46,7 @@ Relationship:
 - One StopPlace → Many Departures
 
 ---
+![Dashboard](wwwroot/images/screenshots/dashboard.png)
 
 ## 🔄 Features
 
@@ -101,8 +107,14 @@ clean commit messages
 
 This project demonstrates a complete full-stack web application using ASP.NET Core MVC with database, API integration, authentication, and testing.
 
+
+## 👨‍💻 Author
+Reza Gohari 
+
+
 🚀 Future Improvements
 Role-based authorization (Admin/User)
 More advanced analytics
 UI enhancements
 Deployment to cloud
+

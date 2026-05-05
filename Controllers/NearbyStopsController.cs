@@ -55,6 +55,14 @@ public class NearbyStopsController : Controller
 
         var nearbyStops = await _enturService.GetNearbyStopsAsync(latitude.Value, longitude.Value);
 
+        // 🔥 hent avganger for hver stopp
+        foreach (var stop in nearbyStops.Take(5)) // begrens til 5 for ytelse
+        {
+            if (!string.IsNullOrWhiteSpace(stop.EnturId))
+            {
+                stop.Departures = await _enturService.GetLiveDeparturesForStopAsync(stop.EnturId);
+            }
+        }
         ViewBag.SearchInfo = $"Showing stops near browser location: {latitude.Value}, {longitude.Value}";
 
         return View("Index", nearbyStops);
@@ -82,4 +90,16 @@ public class NearbyStopsController : Controller
 
         return RedirectToAction("Index", "StopPlaces");
     }
+    [HttpGet]
+public async Task<IActionResult> GetDepartures(string enturId)
+{
+    var departures = await _enturService.GetDeparturesAsync(0, enturId);
+
+    return Json(departures.Select(d => new {
+        d.LineName,
+        d.Destination,
+        ExpectedDepartureTime = d.ExpectedDepartureTime.ToString("HH:mm"),
+        d.DelayMinutes
+    }));
+}
 }

@@ -7,17 +7,17 @@
 <h1>Nearby Stops</h1>
 
 <p class="text-muted">
-    Find public transport stops near your current location, or search from a selected place.
+    Find stops near your current location or by typing a place.
 </p>
 
 <form id="locationForm" asp-action="Search" method="post" class="mb-4">
     @Html.AntiForgeryToken()
 
-    <div class="input-group mb-3">
+    <div class="input-group">
         <input name="selectedPlace"
                id="selectedPlaceInput"
                class="form-control"
-               placeholder="Optional: type a place, e.g. Horten, Oslo S, Skoppum" />
+               placeholder="Type place, e.g. Horten, Borre, Oslo S" />
 
         <button id="findNearbyButton" class="btn btn-primary" type="button">
             📍 Find stops near me
@@ -39,16 +39,13 @@
 
 @if (Model.Any())
 {
-    <h3>Stops found nearby</h3>
-
-    <table class="table table-striped align-middle">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Locality</th>
                 <th>EnturId</th>
-                <th>Coordinates</th>
-                <th></th>
+                <th>Departures</th>
             </tr>
         </thead>
         <tbody>
@@ -58,20 +55,24 @@
                 <td>@stop.Name</td>
                 <td>@stop.Locality</td>
                 <td><code>@stop.EnturId</code></td>
-                <td>@stop.Latitude, @stop.Longitude</td>
                 <td>
-                    <form asp-action="SaveStop" method="post">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="enturId" value="@stop.EnturId" />
-                        <input type="hidden" name="name" value="@stop.Name" />
-                        <input type="hidden" name="locality" value="@stop.Locality" />
-                        <input type="hidden" name="latitude" value="@stop.Latitude" />
-                        <input type="hidden" name="longitude" value="@stop.Longitude" />
-
-                        <button class="btn btn-success btn-sm" type="submit">
-                            Save stop
-                        </button>
-                    </form>
+                    @if (stop.Departures.Any())
+                    {
+                        <ul>
+                            @foreach (var dep in stop.Departures)
+                            {
+                                <li>
+                                    <strong>@dep.LineName</strong> →
+                                    @dep.Destination
+                                    (@dep.ExpectedDepartureTime.ToString("HH:mm"))
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span class="text-muted">No live departures found</span>
+                    }
                 </td>
             </tr>
         }
@@ -81,7 +82,7 @@
 else
 {
     <div class="alert alert-secondary">
-        Click the button to find stops near your current or selected position.
+        No stops found yet.
     </div>
 }
 
@@ -98,32 +99,25 @@ else
             const selectedPlace = selectedPlaceInput.value.trim();
 
             if (selectedPlace.length > 0) {
-                statusText.textContent = "Searching stops near selected place...";
                 form.submit();
                 return;
             }
 
             if (!navigator.geolocation) {
-                statusText.textContent = "Geolocation is not supported by this browser.";
+                statusText.textContent = "Geolocation is not supported.";
                 return;
             }
 
-            statusText.textContent = "Requesting your location...";
+            statusText.textContent = "Requesting location...";
 
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     latitudeInput.value = position.coords.latitude;
                     longitudeInput.value = position.coords.longitude;
-                    statusText.textContent = "Location found. Searching Entur...";
                     form.submit();
                 },
                 () => {
-                    statusText.textContent = "Could not access location. Type a place name instead, for example Horten.";
-                },
-                {
-                    enableHighAccuracy: true,
-                    timeout: 10000,
-                    maximumAge: 0
+                    statusText.textContent = "Location failed. Type a place instead.";
                 }
             );
         });
