@@ -145,30 +145,21 @@ All tests successfully passed.
 
 ![Dashboard](screenshots/dashboard.png)
 
----
-
 ## Departures
 
 ![Departures](screenshots/departure.png)
-
----
 
 ## Stop Places
 
 ![Stop Places](screenshots/stopplaces.png)
 
----
-
 ## Search Entur
 
 ![Search Entur](screenshots/search-entur.png)
 
----
-
 ## Login System
 
 ![Login](screenshots/login.png)
-
 ---
 
 # Installation
