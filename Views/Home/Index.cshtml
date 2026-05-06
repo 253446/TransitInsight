@@ -43,6 +43,28 @@
     </div>
 </section>
 
+<div class="dashboard-panel mb-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>
+            <h3 class="mb-1">Live dashboard</h3>
+            <p class="text-muted mb-0">
+                Departures are refreshed automatically every 60 seconds from Entur API.
+            </p>
+        </div>
+
+        <form id="liveRefreshForm"
+              asp-controller="Home"
+              asp-action="RefreshLiveDepartures"
+              method="post">
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="btn btn-primary">
+                🔄 Refresh live departures
+            </button>
+        </form>
+    </div>
+</div>
+
 <div class="row g-4 mb-5">
     <div class="col-md-3">
         <div class="stat-card">
@@ -105,6 +127,7 @@
                         <div class="list-group-item">
                             <div class="d-flex justify-content-between">
                                 <strong>@departure.LineName → @departure.Destination</strong>
+
                                 @if (departure.DelayMinutes > 0)
                                 {
                                     <span class="badge bg-danger">@departure.DelayMinutes min delay</span>
@@ -114,6 +137,7 @@
                                     <span class="badge bg-success">On time</span>
                                 }
                             </div>
+
                             <small class="text-muted">
                                 @departure.StopPlace?.Name • @departure.ExpectedDepartureTime.ToString("dd.MM HH:mm")
                             </small>
@@ -165,5 +189,13 @@
                 }
             }
         });
+
+        setTimeout(() => {
+            const form = document.getElementById("liveRefreshForm");
+
+            if (form) {
+                form.submit();
+            }
+        }, 60000);
     </script>
 }
