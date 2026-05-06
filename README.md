@@ -143,15 +143,15 @@ All tests successfully passed.
 
 ## Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard.PNG)
 
 ## Departures
 
-![Departures](screenshots/departure.png)
+![Departures](screenshots/departure.PNG)
 
 ## Stop Places
 
-![Stop Places](screenshots/stopplaces.png)
+![Stop Places](screenshots/stopplaces.PNG)
 
 ## Search Entur
 
