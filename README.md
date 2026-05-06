@@ -155,7 +155,7 @@ All tests successfully passed.
 
 ## Search Entur
 
-![Search Entur](screenshots/search-entur.png)
+![Search Entur](screenshots/search-entur.PNG)
 
 ## Login System
 
