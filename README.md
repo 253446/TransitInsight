@@ -157,37 +157,30 @@ Used for:
 
 ---
 
-# Screenshots
+## Screenshots
 
-## Dashboard
-
+### Dashboard
 ![Dashboard](screenshots/dashboard.png)
 
 ---
 
-## Departures
-
+### Departures
 ![Departures](screenshots/departure.png)
 
 ---
 
-## Stop Places
-
+### Stop Places
 ![Stop Places](screenshots/stopplaces.png)
 
 ---
 
-## Search Entur
-
+### Search Entur
 ![Search Entur](screenshots/search-entur.png)
 
 ---
 
-## Login System
-
+### Login System
 ![Login](screenshots/login.png)
-
----
 
 # Installation
 
