@@ -31,10 +31,16 @@ public class HomeController : Controller
             .OrderBy(d => d.ExpectedDepartureTime)
             .ToListAsync();
 
-        var chartGroups = departures
+        var transportModeGroups = departures
             .GroupBy(d => d.TransportMode)
             .OrderBy(g => g.Key)
             .ToList();
+
+        var mostActiveStop = departures
+            .Where(d => d.StopPlace != null)
+            .GroupBy(d => d.StopPlace!.Name)
+            .OrderByDescending(g => g.Count())
+            .FirstOrDefault();
 
         ViewBag.LastUpdated = await _context.ImportLogs
             .OrderByDescending(i => i.ImportedAt)
@@ -46,14 +52,34 @@ public class HomeController : Controller
             TotalStopPlaces = await _context.StopPlaces.CountAsync(),
             TotalDepartures = departures.Count,
             DelayedDepartures = departures.Count(d => d.DelayMinutes > 0),
+            OnTimeDepartures = departures.Count(d => d.DelayMinutes == 0),
             AverageDelayMinutes = departures.Any()
                 ? Math.Round(departures.Average(d => d.DelayMinutes), 1)
                 : 0,
+
+            NextDeparture = departures.FirstOrDefault(),
+
+            MostActiveStopName = mostActiveStop?.Key ?? "N/A",
+            MostActiveStopDepartures = mostActiveStop?.Count() ?? 0,
+
             LatestDepartures = departures
                 .Take(6)
                 .ToList(),
-            ChartLabels = chartGroups.Select(g => g.Key).ToList(),
-            ChartValues = chartGroups.Select(g => g.Count()).ToList()
+
+            TransportModeLabels = transportModeGroups
+                .Select(g => g.Key)
+                .ToList(),
+
+            TransportModeValues = transportModeGroups
+                .Select(g => g.Count())
+                .ToList(),
+
+            DelayStatusLabels = new List<string> { "On time", "Delayed" },
+            DelayStatusValues = new List<int>
+            {
+                departures.Count(d => d.DelayMinutes == 0),
+                departures.Count(d => d.DelayMinutes > 0)
+            }
         };
 
         return View(viewModel);

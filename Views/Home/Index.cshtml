@@ -65,7 +65,7 @@
     </div>
 </div>
 
-<div class="row g-4 mb-5">
+<div class="row g-4 mb-4">
     <div class="col-md-3">
         <div class="stat-card">
             <div class="stat-icon">📍</div>
@@ -88,6 +88,16 @@
 
     <div class="col-md-3">
         <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div>
+                <p class="stat-label">On Time</p>
+                <h2>@Model.OnTimeDepartures</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card">
             <div class="stat-icon">⏱️</div>
             <div>
                 <p class="stat-label">Delayed</p>
@@ -95,13 +105,49 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="col-md-3">
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
         <div class="stat-card">
             <div class="stat-icon">📊</div>
             <div>
                 <p class="stat-label">Avg Delay</p>
                 <h2>@Model.AverageDelayMinutes min</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="stat-card">
+            <div class="stat-icon">🚏</div>
+            <div>
+                <p class="stat-label">Most Active Stop</p>
+                <h2 class="fs-5">@Model.MostActiveStopName</h2>
+                <small class="text-muted">@Model.MostActiveStopDepartures departures</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="stat-card">
+            <div class="stat-icon">➡️</div>
+            <div>
+                <p class="stat-label">Next Departure</p>
+
+                @if (Model.NextDeparture != null)
+                {
+                    <h2 class="fs-5">
+                        @Model.NextDeparture.LineName → @Model.NextDeparture.Destination
+                    </h2>
+                    <small class="text-muted">
+                        @Model.NextDeparture.ExpectedDepartureTime.ToString("HH:mm")
+                    </small>
+                }
+                else
+                {
+                    <h2 class="fs-5">No data</h2>
+                }
             </div>
         </div>
     </div>
@@ -111,11 +157,20 @@
     <div class="col-lg-7">
         <div class="dashboard-panel">
             <h3 class="mb-3">Departures by Transport Mode</h3>
-            <canvas id="departuresChart"></canvas>
+            <canvas id="transportModeChart"></canvas>
         </div>
     </div>
 
     <div class="col-lg-5">
+        <div class="dashboard-panel">
+            <h3 class="mb-3">Delay Status</h3>
+            <canvas id="delayStatusChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mt-1">
+    <div class="col-lg-12">
         <div class="dashboard-panel">
             <h3 class="mb-3">Latest Departures</h3>
 
@@ -157,18 +212,21 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        const labels = @Html.Raw(Json.Serialize(Model.ChartLabels));
-        const values = @Html.Raw(Json.Serialize(Model.ChartValues));
+        const transportLabels = @Html.Raw(Json.Serialize(Model.TransportModeLabels));
+        const transportValues = @Html.Raw(Json.Serialize(Model.TransportModeValues));
 
-        const ctx = document.getElementById('departuresChart');
+        const delayLabels = @Html.Raw(Json.Serialize(Model.DelayStatusLabels));
+        const delayValues = @Html.Raw(Json.Serialize(Model.DelayStatusValues));
 
-        new Chart(ctx, {
+        const transportCtx = document.getElementById('transportModeChart');
+
+        new Chart(transportCtx, {
             type: 'bar',
             data: {
-                labels: labels,
+                labels: transportLabels,
                 datasets: [{
                     label: 'Departures',
-                    data: values,
+                    data: transportValues,
                     borderWidth: 1
                 }]
             },
@@ -187,6 +245,23 @@
                         }
                     }
                 }
+            }
+        });
+
+        const delayCtx = document.getElementById('delayStatusChart');
+
+        new Chart(delayCtx, {
+            type: 'doughnut',
+            data: {
+                labels: delayLabels,
+                datasets: [{
+                    label: 'Delay status',
+                    data: delayValues,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
             }
         });
 
