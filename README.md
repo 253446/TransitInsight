@@ -1,214 +1,199 @@
 # TransitInsight
 
-A full-stack ASP.NET Core MVC transport dashboard using Entur API, Entity Framework Core, SQLite and real-time departure analytics.
+A modern ASP.NET Core MVC web application for monitoring public transport departures using the Entur API.
 
----
-
-# Project Overview
-
-TransitInsight is a modern transport management and analytics system developed with ASP.NET Core MVC.
-
-The application integrates with the Entur public transport API to provide real-time departure information, stop place search, live dashboard analytics and transport statistics.
-
-The system demonstrates:
-
-- ASP.NET Core MVC architecture
-- Entity Framework Core with SQLite
-- REST API integration
-- Authentication and authorization
-- CRUD operations
-- Real-time dashboard updates
-- Chart.js analytics
-- Unit testing with xUnit
-- GitFlow workflow
+TransitInsight allows users to search for stop places, import live departures, monitor delays, and visualize transport data through an advanced real-time dashboard.
 
 ---
 
 # Features
 
-## Dashboard Analytics
-
-- Live transport dashboard
-- Departure statistics
-- Delay analytics
-- Average delay calculation
-- Most active stop place
-- Next departure information
-- Automatic live refresh every 60 seconds
-- Chart.js visualizations
-
-## Stop Place Management
-
-- Create stop places
-- Edit stop places
-- Delete stop places
-- View stop details
-- Store Entur stop IDs
-- Store GPS coordinates
-
-## Live Departures
-
-- Real-time departures from Entur API
-- Delay calculations
-- Transport mode tracking
-- Destination tracking
-- Automatic refresh system
-
-## Search Entur API
-
-- Search stop places directly from Entur
-- Save stop places to local database
-- GPS/location support
-- Nearby stops functionality
-
-## Authentication
-
-- ASP.NET Core Identity
-- Register/Login system
-- Protected routes with Authorize attribute
-
-## Testing
-
-- Unit testing with xUnit
-- Dashboard tests
-- StopPlace tests
-- Departure tests
+- ASP.NET Core MVC architecture
+- Entity Framework Core with SQLite
+- Entur API integration
+- Live departure import
+- Real-time dashboard refresh
+- Transport statistics and charts
+- Delay monitoring
+- Nearby stops search
+- Authentication system with ASP.NET Identity
+- Responsive Bootstrap UI
+- Chart.js data visualization
+- Automatic live refresh system
+- Git version control with branches
+- xUnit automated testing
 
 ---
 
 # Technologies Used
 
-- ASP.NET Core MVC
-- C#
-- Entity Framework Core
-- SQLite
-- ASP.NET Core Identity
-- Bootstrap 5
-- Chart.js
-- Entur API
-- xUnit
-- Git & GitHub
+| Technology | Description |
+|---|---|
+| ASP.NET Core MVC | Web framework |
+| Entity Framework Core | ORM / database |
+| SQLite | Local database |
+| ASP.NET Identity | Authentication |
+| Bootstrap 5 | Responsive UI |
+| Chart.js | Dashboard charts |
+| Entur API | Public transport API |
+| xUnit | Automated testing |
+| Git & GitHub | Version control |
 
 ---
 
-# Architecture
+# System Architecture
 
-The project follows the MVC architecture pattern:
+The application follows the MVC architecture pattern:
 
-```txt
-Controllers/
-Models/
-Views/
-Services/
-Data/
-```
-
-Main components:
-
-- Controllers handle HTTP requests
-- Models represent domain entities
-- Views render Razor UI pages
-- Services handle API integration
-- DbContext manages database access
+- Models → database entities and view models
+- Views → Razor UI pages
+- Controllers → application logic
+- Services → Entur API communication
+- Data → Entity Framework database context
 
 ---
 
-# Database Models
+# Main Functionalities
 
-## StopPlace
+## Dashboard
 
-Represents transport stop locations.
+The dashboard displays:
 
-## Departure
+- Total stop places
+- Total departures
+- Delay statistics
+- Average delay time
+- Latest live departures
+- Transport mode charts
+- Delay status chart
+- Most active stop place
+- Next upcoming departure
 
-Represents departures connected to stop places.
-
-## ImportLog
-
-Stores API import history and refresh tracking.
-
-## FavoriteStop
-
-Stores user-selected favorite stops.
-
----
-
-# Relationships
-
-```txt
-StopPlace (1) ---> (Many) Departures
-```
+The dashboard automatically refreshes live data every 60 seconds.
 
 ---
 
-# Entur API Integration
+## Stop Places
 
-The application integrates with:
+Users can:
 
-- Entur Geocoder API
-- Entur Journey Planner API
-
-Used for:
-
-- Stop place search
-- Live departures
-- Nearby stops
-- Real-time transport information
+- Create stop places manually
+- Save stop places from Entur search
+- Edit and delete stop places
+- Import live departures
 
 ---
 
-## Screenshots
+## Departures
 
-### Dashboard
+The departures system supports:
+
+- Real-time departures
+- Delay calculation
+- Destination overview
+- Transport mode tracking
+- Live updates from Entur API
+
+---
+
+## Nearby Stops
+
+Users can:
+
+- Search nearby stops using GPS
+- Search by place name
+- Display nearby stop locations
+- View departures from nearby stops
+
+---
+
+## Authentication
+
+The system includes:
+
+- User registration
+- User login
+- Authorization protection
+- ASP.NET Identity integration
+
+---
+
+# Automated Testing
+
+The project includes xUnit automated tests.
+
+Implemented tests include:
+
+- StopPlace model tests
+- Departure model tests
+- Dashboard model tests
+
+Example test areas:
+
+- Name storage
+- EnturId storage
+- Delay calculations
+- Dashboard statistics
+
+All tests successfully passed.
+
+---
+
+# Screenshots
+
+## Dashboard
+
 ![Dashboard](screenshots/dashboard.png)
 
 ---
 
-### Departures
+## Departures
+
 ![Departures](screenshots/departure.png)
 
 ---
 
-### Stop Places
+## Stop Places
+
 ![Stop Places](screenshots/stopplaces.png)
 
 ---
 
-### Search Entur
+## Search Entur
+
 ![Search Entur](screenshots/search-entur.png)
 
 ---
 
-### Login System
+## Login System
+
 ![Login](screenshots/login.png)
+
+---
 
 # Installation
 
 ## Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/YOUR-USERNAME/TransitInsight.git
 ```
 
 ---
 
-## Navigate to Project
+## Open Project
 
-```bash
-cd TransitInsight
+Open:
+
+```txt
+TransitInsight.sln
 ```
+
+in Visual Studio or VS Code.
 
 ---
 
-## Restore Packages
-
-```bash
-dotnet restore
-```
-
----
-
-## Apply Database Migrations
+## Run Database Migration
 
 ```bash
 dotnet ef database update
@@ -222,99 +207,87 @@ dotnet ef database update
 dotnet run
 ```
 
+Open browser:
+
+```txt
+http://localhost:5025
+```
+
 ---
 
-# Testing
+# Test Execution
 
-Run all tests:
+Run automated tests:
 
 ```bash
 dotnet test
 ```
 
-Current test coverage includes:
-
-- Dashboard logic
-- StopPlace model tests
-- Departure model tests
-
 ---
 
-# Git Workflow
-
-The project uses GitFlow-inspired branching:
+# Project Structure
 
 ```txt
-main
-dev
-extraFeature
+TransitInsight/
+│
+├── Controllers/
+├── Models/
+├── Views/
+├── Services/
+├── Data/
+├── wwwroot/
+├── screenshots/
+├── TransitInsight.Tests/
+└── README.md
 ```
 
-Used for:
-
-- Feature development
-- Testing
-- Safe merges
-- Version control
-
 ---
 
-# Real-Time Dashboard
+# API Integration
 
-The dashboard automatically refreshes departure data every 60 seconds using the Entur API.
+The system uses the Entur public transport API for:
 
-Features include:
-
-- Live departure updates
+- Stop place search
+- Live departures
+- Transport information
 - Delay monitoring
-- Transport statistics
-- Dynamic charts
 
 ---
 
-# GPS and Nearby Stops
+# Testing on Multiple Devices
 
-The application supports:
+The application was tested on:
 
-- Browser geolocation
-- Nearby stop search
-- Manual place search
+- Desktop PC
+- Laptop
+- Multiple browsers
 
-Testing showed that GPS accuracy depends on the device:
-
-- Mobile devices provide more accurate GPS
-- Desktop/laptop browsers often use IP-based location
-
-Therefore, the system supports both automatic GPS and manual location search.
+Results were consistent across devices.
 
 ---
 
-# Security
+# Known Warnings
 
-The application uses:
+Some NuGet packages may show low severity vulnerability warnings during build:
 
-- ASP.NET Core Identity
-- Authentication
-- Authorization
-- Anti-forgery tokens
-- Protected controller actions
+- NuGet.Protocol
+- NuGet.Packaging
+
+These warnings do not affect application functionality.
 
 ---
 
-# Reflection
+# Future Improvements
 
-This project demonstrates how a modern transport dashboard can be developed using ASP.NET Core MVC and real-time API integration.
+Possible future improvements include:
 
-Key learning outcomes:
-
-- MVC architecture
-- Database design
-- REST API integration
-- Authentication systems
-- Frontend analytics
-- Real-time data refresh
-- Git workflow
-- Unit testing
+- SignalR real-time updates
+- Interactive map integration
+- Route planning
+- Dark mode
+- Admin roles
+- Deployment to Azure
+- Mobile responsive enhancements
 
 ---
 
@@ -324,6 +297,12 @@ Reza Gohari
 
 ---
 
+# Course
+
+TDS241 Fullstack / ASP.NET Core MVC Exam Project 2026
+
+---
+
 # License
 
-This project was developed for educational purposes.
+This project was created for educational purposes.
